@@ -41,8 +41,8 @@
 </template>
 
 <script>
-//import axios from 'axios'
-
+import axios from 'axios'
+import { mapActions } from 'vuex';
 export default {
   name: 'Home',
   components: {
@@ -50,10 +50,12 @@ export default {
   },
   data () {
     return {
-      user: "Mert Akıner"
+      user: "Mert Akıner",
+      isGiris: Boolean
     }
   },
-  /*methods: {
+  methods: {
+    ...mapActions(['updateIsCikis']),
      logout() {
             
       let formData = new FormData();
@@ -65,12 +67,13 @@ export default {
         'Content-type': 'application/x-www-form-urlencoded'
       }
       )
+        this.updateIsCikis();
         localStorage.setItem("user-info",JSON.stringify(result))
-        this.$router.push({name: 'login'})
+        this.$router.push({name: 'Login'})
         alert("Çıkış Yaptınız")
     }
     
-  },*/
+  },
 }
 </script>
 
