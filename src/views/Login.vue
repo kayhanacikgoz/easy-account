@@ -89,6 +89,7 @@ export default {
       if (result.status==200 && result.data.MSG_TYPE =="S") {
         this.$router.push({name: 'Home'})
         import('../views/Home.vue')
+        // mert
         
       } else {
         this.state = true
