@@ -67,7 +67,7 @@ export default {
       email: '',
       password: '',
       state: '',
-      isGiris: false
+      isGiris: Boolean
     }
   },
   methods: {
