@@ -3,7 +3,7 @@
     <v-main>
       <v-container class="align-start fill-height" fluid>
         <v-row class="justify-space-between" rows="1" >
-          <h4 class="mt-4 ml-4"><span class="font-weight-regular">Hoşgeldin</span> {{user}}</h4>
+          <h4 class="mt-4 ml-4"><span class="font-weight-regular">Hoşgeldin</span> {{userInfo}}</h4>
           <v-btn class="mt-4 mr-4" color="deep-orange" text>
             <h3 v-on:click="logout">Logout</h3>
           </v-btn>
@@ -42,7 +42,8 @@
 
 <script>
 import axios from 'axios'
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'Home',
   components: {
@@ -50,10 +51,19 @@ export default {
   },
   data () {
     return {
-      user: "Mert Akıner",
       isGiris: Boolean
     }
   },
+ created() {
+    this.$store.dispatch('loadUserInfo');
+  },
+  computed: {
+    
+    ...mapState([
+          'userInfo'
+      ]),
+    }, 
+    
   methods: {
     ...mapActions(['updateIsCikis']),
      logout() {
