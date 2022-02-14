@@ -69,7 +69,6 @@ export default {
       password: '',
       state: '',
       isGiris: Boolean,
-      user:''
 
     }
   },
