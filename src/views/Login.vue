@@ -61,17 +61,21 @@
 <script>
 import axios from 'axios'
 import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
       email: '',
       password: '',
       state: '',
-      isGiris: Boolean
+      isGiris: Boolean,
+      user:''
+
     }
   },
   methods: {
     ...mapActions(['updateIsGiris']),
+  
     async login() {
 
       let formData = new FormData();
@@ -89,6 +93,8 @@ export default {
       )
       if (result.status==200 && result.data.MSG_TYPE =="S") {
         this.updateIsGiris();
+       
+            
         //Member info servisi çağrılacak!!!
         this.$router.push({name: 'Home'})
         import('../views/Home.vue')
@@ -101,5 +107,6 @@ export default {
     }
     
   },
+ 
 }
 </script>
