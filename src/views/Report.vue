@@ -1,22 +1,34 @@
 <template>
-     
+       <v-card>
+      <v-card-title>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
     <v-data-table
       :headers="headers"
       :items="reportItems"
       class="elevation-1"
+      :search="search"
+        
     >
    
-    <template v-slot:items="props">
-      <td>{{ props.item.COMPANY_NAME }}</td>
-      <td>{{ props.item.PARTNER_NAME }}</td>
-       <td>{{ props.item.PARTNER_TYPE }}</td>
-       <td>{{ props.item.Total }}</td>
-      <td>{{ props.item.Satış }}</td>
-       <td>{{ props.item.Tahsilat }}</td>
-       <td>{{ props.item.Alış }}</td>
-       <td>{{ props.item.Ödeme }}</td>
+     <template v-slot:[`item.Total`]="{ item }" >
+      <v-chip label 
+        :color="getColor(item.Total)"
+        dark
+      > <v-avatar left>
+          <v-icon>mdi-account-cash</v-icon>
+        </v-avatar>
+        {{ item.Total }}
+      </v-chip>
      </template>
     </v-data-table>
+    </v-card>
 </template>
 <script>
 
@@ -28,6 +40,7 @@ export default {
 
     data() {
         return {
+            search: '',
            headers: [
             {
                 text: 'Şirket',
@@ -48,6 +61,13 @@ export default {
 
     },
 
+    methods: {
+        getColor (Total) {
+        if (Total > 0) return 'red'
+        else if (Total < 0) return 'green'
+        else return 'orange' }
+    },
+
     mounted() {
         this.$store.dispatch('loadReportList');
     },
@@ -58,3 +78,9 @@ export default {
 
 }
 </script>
+
+<style>
+.v-chip .v-chip__content {
+    min-width: 100px;
+}
+</style>
