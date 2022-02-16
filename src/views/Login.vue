@@ -69,6 +69,7 @@ export default {
       password: '',
       state: '',
       isGiris: Boolean,
+      user:''
 
     }
   },
@@ -92,7 +93,6 @@ export default {
       )
       if (result.status==200 && result.data.MSG_TYPE =="S") {
         this.updateIsGiris();
-       
             
         //Member info servisi çağrılacak!!!
         this.$router.push({name: 'Home'})

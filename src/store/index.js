@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userInfo:[],
-    isGiris: false
+    isGiris: false,
   },
   getters: {
     userInfo: state => {
@@ -34,11 +34,15 @@ export default new Vuex.Store({
       commit('updateIsCikis');
     },
     loadUserInfo({ commit }) {
+      let formData = new FormData();
+
+        formData.append('member_id', 2);
+
       axios.post(
-        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=member_info", {
+        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=member_info", formData, {
           headers: {'Content-type' : 'application/x-www-form-urlencoded'}
         }).then(response => response.data).then(userInfo => {
-          console.log(userInfo);
+          //console.log(userInfo);
           commit('loadUserInfo', userInfo)
         })
     }
