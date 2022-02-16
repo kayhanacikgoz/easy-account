@@ -27,12 +27,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Fatura.vue')
   },
   {
-    path: '/rapor',
-    name: 'Rapor',
+    path: '/list',
+    name: 'List',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Rapor.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/List.vue')
+  },
+  {
+    path: '/report',
+    name: 'Report',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Report.vue')
   },
 ]
 

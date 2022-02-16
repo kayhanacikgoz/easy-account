@@ -20,6 +20,6 @@
 </template>
 <script>
 export default {
-name: 'Rapor',
+name: 'List',
 }
 </script>
