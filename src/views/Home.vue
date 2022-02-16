@@ -60,15 +60,12 @@ export default {
   },
   data () {
     return {
-       
-        member: {
-          MEMBER_NICK :''
-        },
+      
       isGiris: Boolean,
       
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch('loadUserInfo');
   },
   computed: {

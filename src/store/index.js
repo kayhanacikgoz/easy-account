@@ -69,7 +69,7 @@ export default new Vuex.Store({
       axios.post(
         "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_report", formDataReport, {
           headers: {'Content-type' : 'application/x-www-form-urlencoded'}
-        }).then(response => response.data).then(reportItems => {
+        }).then(response => response.data.tran_list).then(reportItems => {
           console.log(reportItems);
           commit('loadReportList', reportItems)
         })
