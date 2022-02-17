@@ -1,5 +1,6 @@
 <template>
   <v-card class="mx-5 my-5">
+    <h1 class="mx-3 my-2">Fatura Listesi</h1>
     <router-link to="home" class="text-decoration-none">
       <v-btn class="mx-3 my-2" color="orange" fab small dark>
         <v-icon>mdi-arrow-left</v-icon>
@@ -55,5 +56,7 @@ export default {
 </script>
 
 <style>
-
+h1 {
+color:gray;
+}
 </style>

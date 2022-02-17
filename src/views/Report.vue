@@ -1,5 +1,7 @@
 <template>
-  <v-card class="mx-5 my-5">
+
+  <v-card class="mx-6 my-6 ">
+    <h1 class="mx-3 my-2">Özet Raporlar</h1>
     <router-link to="home" class="text-decoration-none">
       <v-btn class="mx-3 my-2" color="orange" fab small dark>
         <v-icon>mdi-arrow-left</v-icon>
@@ -65,6 +67,9 @@ export default {
 </script>
 
 <style>
+h1 {
+color:gray;
+}
 .v-chip .v-chip__content {
   min-width: 100px;
 }
