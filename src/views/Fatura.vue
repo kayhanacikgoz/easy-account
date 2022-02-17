@@ -227,25 +227,6 @@
                             dense
                             ></v-text-field>
                             </v-col>
-                            <!--<v-col
-                                cols="12"
-                                sm="4"
-                                md="4"
-                                class="d-flex justify-center"
-                            >
-                                <v-radio-group
-                                class="mt-0"
-                                column
-                                >
-                                <v-radio
-                                    v-for= "n in items"
-                                    :key= currency
-                                    :items="currency"
-                                    color="primary"
-                                    :value= "n"
-                                ></v-radio>
-                                </v-radio-group>
-                            </v-col>-->
                             <v-col
                                 cols="12"
                                 md="4"
@@ -286,8 +267,81 @@
 </template>
 
 <script>
+import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
 
-export default {
-name: 'Fatura',
+  export default {
+    
+    data () {
+      return {
+        paraBirimi: [],
+        menu: false,
+        durum: [],
+        hesapTuru: [],
+        donem: [],
+        firma: [],
+        tutar: '',
+        aciklama: '',
+        kullaniciTipi: [],
+        autoUpdate: true,
+        isUpdating: false,
+        paraBirimiPost: null,
+        durumPost: null,
+        hesapTuruPost: null,
+        donemPost: null,
+        firmaPost: null,
+        kullaniciTipiPost: null,
+        tutarPost: '',
+        aciklamaPost: '',
+        Liste: []
+      }
+    },
+    components: {
+        //
+    },
+    async created() {
+        let std_list = new sisu9_std_list('status');
+        std_list.callService();
+        this.durum = std_list.Liste
+
+        std_list = new sisu9_std_list('accountype')
+        std_list.callService();
+        this.hesapTuru = std_list.Liste
+
+        std_list = new sisu9_std_list('company')
+        std_list.callService();
+        this.firma = std_list.Liste
+
+        std_list = new sisu9_std_list('donem')
+        std_list.callService();
+        this.donem = std_list.Liste
+
+        std_list = new sisu9_std_list('usertype')
+        std_list.callService();
+        this.kullaniciTipi = std_list.Liste
+
+        std_list = new sisu9_std_list('currency')
+        std_list.callService();
+        this.paraBirimi = std_list.Liste
+        
+    }, 
+    methods: {
+    async formPost() {
+     
+      let formData = new FormData();
+
+        formData.append('TRAN_ID', this.paraBirimiPost);
+        formData.append('MSG_CONTENT', this.durumPost);
+        formData.append('hesapTuruPost', this.hesapTuruPost);
+        formData.append('donemPost', this.donemPost);
+        formData.append('firmaPost', this.firmaPost);
+        formData.append('kullaniciTipiPost', this.kullaniciTipiPost);
+        formData.append('tutarPost' , this.tutarPost);
+        formData.append('aciklamaPost' , this.aciklamaPost);
+        let listItem = { '"TRAN_COMPANY"': this.firmaPost,'"TRAN_STATUS"': this.durumPost}
+        this.Liste.push(listItem); 
+        console.log(this.Liste)
+    },
+    
+  },
 }
 </script>
