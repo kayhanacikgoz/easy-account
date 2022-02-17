@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     userInfo:[],
     reportItems:[],
+    tranItems: [],
     isGiris: false,
   },
   getters: {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     reportItems: state => {
       return state.reportItems;
+    },
+    tranItems: state => {
+      return state.tranItems;
     },
    
   },
@@ -31,6 +35,9 @@ export default new Vuex.Store({
     },
     loadReportList(state, reportItems) {
       state.reportItems = reportItems;
+    },
+    loadTranList(state, tranItems) {
+      state.tranItems = tranItems;
     },
   },
   actions: {
@@ -60,7 +67,6 @@ export default new Vuex.Store({
       formDataReport.append('partner', null);
       formDataReport.append('kelime', '');
       formDataReport.append('hesap', null);
-      formDataReport.append('parabr', null);
       formDataReport.append('sayfano', null);
       formDataReport.append('bastarih', '2021-07-01');
       formDataReport.append('sontarih', '2022-11-30');
@@ -72,6 +78,27 @@ export default new Vuex.Store({
         }).then(response => response.data.tran_list).then(reportItems => {
           console.log(reportItems);
           commit('loadReportList', reportItems)
+        })
+    },
+    loadTranList({ commit }) {
+      let formDataTran = new FormData();
+
+      formDataTran.append('firma', 1);
+      formDataTran.append('partner', null);
+      formDataTran.append('kelime', '');
+      formDataTran.append('hesap', null);
+      formDataTran.append('parabr', null);
+      formDataTran.append('sayfano', null);
+      formDataTran.append('bastarih', '2021-07-01');
+      formDataTran.append('sontarih', '2022-11-30');
+      formDataTran.append('gosterim', 10);
+
+      axios.post(
+        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_list", formDataTran, {
+          headers: {'Content-type' : 'application/x-www-form-urlencoded'}
+        }).then(response => response.data.tran_list).then(tranItems => {
+          console.log(tranItems);
+          commit('loadTranList', tranItems)
         })
     },
   },
