@@ -63,7 +63,7 @@ export default new Vuex.Store({
     loadReportList({ commit }) {
       let formDataReport = new FormData();
 
-      formDataReport.append('firma', 2);
+      formDataReport.append('firma', 0);
       formDataReport.append('partner', null);
       formDataReport.append('kelime', '');
       formDataReport.append('hesap', null);
@@ -83,7 +83,7 @@ export default new Vuex.Store({
     loadTranList({ commit }) {
       let formDataTran = new FormData();
 
-      formDataTran.append('firma', 1);
+      formDataTran.append('firma', 0);
       formDataTran.append('partner', null);
       formDataTran.append('kelime', '');
       formDataTran.append('hesap', null);

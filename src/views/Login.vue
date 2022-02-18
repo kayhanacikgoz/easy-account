@@ -18,7 +18,6 @@
                           id="email"
                           label="Email"
                           name="email"
-                          prepend-icon="email"
                           type="text"
                           color="light-blue darken-2" 
                           v-model="email"
@@ -27,7 +26,6 @@
                           id="password"
                           label="Password"
                           name="password"
-                          prepend-icon="lock"
                           type="password"
                           color="light-blue darken-2" 
                           v-model="password"
@@ -93,7 +91,7 @@ export default {
       )
       if (result.status==200 && result.data.MSG_TYPE =="S") {
         this.updateIsGiris();
-            
+        console.log(formData)
         //Member info servisi çağrılacak!!!
         this.$router.push({name: 'Home'})
         import('../views/Home.vue')

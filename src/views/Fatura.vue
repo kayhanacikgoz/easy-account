@@ -10,6 +10,7 @@
     <v-row>
         <v-container class="d-flex justify-space-around flex-wrap">
             <v-btn
+            to="home"
             color="info"
             class="ma-2 white--text"
             >
@@ -21,7 +22,7 @@
             class="ma-2 white--text"
             >
                 <v-icon left dark>mdi-format-list-bulleted</v-icon>
-                Listele   
+                Ekle 
             </v-btn>
             <v-btn
             color="warning"
@@ -42,7 +43,7 @@
             class="ma-2 white--text"
             >
             <v-icon left dark>mdi-delete</v-icon>
-            Sil 
+            Sİl 
             </v-btn>
         </v-container>
     </v-row>
@@ -71,7 +72,7 @@
                             cols="12"
                             sm="3"
                         >
-                            <v-menu
+                            <!--<v-menu
                                 ref="menu"
                                 v-model="menu"
                                 :close-on-content-click="false"
@@ -115,7 +116,7 @@
                                     OK
                                 </v-btn>
                                 </v-date-picker>
-                            </v-menu>
+                            </v-menu>-->
                         </v-col>
 
                         <v-col
@@ -171,7 +172,7 @@
                             cols="12"
                             sm="4"
                             >
-                                <v-select
+                                <!-- <v-select
                                 :items="kullaniciTipi"
                                 item-text="text"
                                 item-value="value"
@@ -179,23 +180,23 @@
                                 v-model="kullaniciTipiPost"
                                 name="kullaniciTipiPost"
                                 solo
-                                ></v-select>
+                                ></v-select> -->
                             </v-col>   
                         <v-col
-                            class="d-flex"
-                            cols="12"
-                            sm="4"
-                            >
-                                <v-select
-                                :items="donem"
-                                item-text="text"
-                                item-value="value"
-                                label="Cari Dönem"
-                                v-model="donemPost"
-                                name="donemPost"
-                                solo
-                                ></v-select>
-                            </v-col>   
+                        class="d-flex"
+                        cols="12"
+                        sm="4"
+                        >
+                            <!-- <v-select
+                            :items="donem"
+                            item-text="text"
+                            item-value="value"
+                            label="Cari Dönem"
+                            v-model="donemPost"
+                            name="donemPost"
+                            solo
+                            ></v-select> -->
+                        </v-col>   
                         </v-row>
                         </v-row>
                         <v-row>
@@ -228,21 +229,21 @@
                             ></v-text-field>
                             </v-col>
                             <v-col
-                                cols="12"
-                                md="4"
-                                sm="4"
-                            >
-                                <v-textarea
-                                solo
-                                name="aciklamaPost"
-                                label="Açıklama"
-                                v-model="aciklamaPost"
-                                ></v-textarea>
+                            cols="12"
+                            md="4"
+                            sm="4"
+                        >
+                            <v-textarea
+                            solo
+                            name="aciklamaPost"
+                            label="Açıklama"
+                            v-model="aciklamaPost"
+                            ></v-textarea>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-btn
-                            v-on:click="formPost"
+                            v-on:click="addFatura"
                             x-large
                             color="info"
                             dark
@@ -255,7 +256,7 @@
                             color="red"
                             dark
                             >
-                                clear
+                            temizle
                             </v-btn>
                         </v-row>
                 </v-container>
@@ -267,33 +268,36 @@
 </template>
 
 <script>
+import axios from 'axios'
 import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
 
   export default {
-    
     data () {
-      return {
-        paraBirimi: [],
-        menu: false,
-        durum: [],
-        hesapTuru: [],
-        donem: [],
-        firma: [],
-        tutar: '',
-        aciklama: '',
-        kullaniciTipi: [],
-        autoUpdate: true,
-        isUpdating: false,
-        paraBirimiPost: null,
-        durumPost: null,
-        hesapTuruPost: null,
-        donemPost: null,
-        firmaPost: null,
-        kullaniciTipiPost: null,
-        tutarPost: '',
-        aciklamaPost: '',
-        Liste: []
-      }
+        return {
+            paraBirimi: [],
+            menu: false,
+            durum: [],
+            hesapTuru: [],
+            //donem: [],
+            firma: [],
+            tutar: '',
+            aciklama: '',
+            //kullaniciTipi: [],
+            autoUpdate: true,
+            isUpdating: false,
+            firmaIndex: null,
+            paraBirimiPost: null,
+            durumPost: null,
+            hesapTuruPost: null,
+            //donemPost: null,
+            firmaPost: null,
+            //kullaniciTipiPost: null,
+            tutarPost: '',
+            aciklamaPost: '',
+            datePost: '',
+            userIdPost: '',
+            Liste: [],
+        }
     },
     components: {
         //
@@ -311,6 +315,10 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
         std_list.callService();
         this.firma = std_list.Liste
 
+        /*std_list = new sisu9_std_list('donem')
+        std_list.callService();
+        this.donem = std_list.Liste*/
+
         std_list = new sisu9_std_list('donem')
         std_list.callService();
         this.donem = std_list.Liste
@@ -322,26 +330,31 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
         std_list = new sisu9_std_list('currency')
         std_list.callService();
         this.paraBirimi = std_list.Liste
-        
     }, 
     methods: {
-    async formPost() {
-     
-      let formData = new FormData();
+        async addFatura() {
 
-        formData.append('TRAN_ID', this.paraBirimiPost);
-        formData.append('MSG_CONTENT', this.durumPost);
-        formData.append('hesapTuruPost', this.hesapTuruPost);
-        formData.append('donemPost', this.donemPost);
-        formData.append('firmaPost', this.firmaPost);
-        formData.append('kullaniciTipiPost', this.kullaniciTipiPost);
-        formData.append('tutarPost' , this.tutarPost);
-        formData.append('aciklamaPost' , this.aciklamaPost);
-        let listItem = { '"TRAN_COMPANY"': this.firmaPost,'"TRAN_STATUS"': this.durumPost}
-        this.Liste.push(listItem); 
-        console.log(this.Liste)
+            let formData = new FormData();
+            formData.append('company_id', this.firmaPost);
+            formData.append('tutar', this.tutarPost);
+            formData.append('account_type', this.hesapTuruPost);
+            formData.append('currency_type', this.paraBirimiPost);
+            formData.append('note', this.aciklamaPost);
+            formData.append('partner_id', 6);
+            formData.append('trans_date', "2022-05-05");
+            formData.append('tran_user_id', 2);
+
+            let result = await axios.post ( "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_add",
+            formData,{'Content-type': 'application/x-www-form-urlencoded'} )
+
+            if (result.status==200 && result.data.msg.MSG_TYPE =="S") {
+                alert(result.data.msg.MSG_CONTENT)
+                console.log(result.data.transaction)
+            } else {
+                alert("Kayıt eklenemedi!")
+            }
+        },
+        
     },
-    
-  },
 }
 </script>
