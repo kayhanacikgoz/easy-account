@@ -105,17 +105,17 @@ export default new Vuex.Store({
           commit('loadTranList', tranItems)
         })
     },
-    loadFaturaDetay({ commit }) {
+
+    loadFaturaDetay({ commit }, value  ) {
+      console.log("loadFaturaDetay  girdim." + value)
+      
       let formDataDetail = new FormData();
-
-      formDataDetail.append('islem_id', 40);
-
+      formDataDetail.append('islem_id', value);
       axios.post(
         "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction", formDataDetail, {
           headers: {'Content-type' : 'application/x-www-form-urlencoded'}
         }).then(response => response.data.transaction).then(tranDetails => {
-          console.log(tranDetails);
-          commit('loadFaturaDetay', tranDetails)
+          commit('loadFaturaDetay', tranDetails);
         })
     },
   },
