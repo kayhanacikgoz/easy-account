@@ -59,7 +59,7 @@
                             <v-select
                             item-text="text"
                             item-value="value"
-                            :label="tranDetails[0].SUBCOMP_LABEL"
+                            label="Firma"
                             v-model="firmaPost"
                             name="firmaPost"
                             outlined
@@ -74,7 +74,7 @@
                             <v-select
                             item-text="text"
                             item-value="value"
-                            :label="tranDetails[0].SUBCOMP_LABEL"
+                            label="Hesap Türü Post"
                             v-model="hesapTuruPost"
                             name="hesapTuruPost"
                             outlined
@@ -101,30 +101,14 @@
                             cols="12"
                             sm="4"
                             >
-                                <!-- <v-select
-                                :items="kullaniciTipi"
-                                item-text="text"
-                                item-value="value"
-                                label="Kullanıcı Tipi"
-                                v-model="kullaniciTipiPost"
-                                name="kullaniciTipiPost"
-                                solo
-                                ></v-select> -->
+                         
                             </v-col>   
                         <v-col
                         class="d-flex"
                         cols="12"
                         sm="4"
                         >
-                            <!-- <v-select
-                            :items="donem"
-                            item-text="text"
-                            item-value="value"
-                            label="Cari Dönem"
-                            v-model="donemPost"
-                            name="donemPost"
-                            solo
-                            ></v-select> -->
+                           
                         </v-col>   
                         </v-row>
                         </v-row>
@@ -149,7 +133,8 @@
                             md="4"
                             >
                             <v-text-field
-                            label="Tutar"
+                            :label= tranDetails[0].MASTER_TRAN_AMOUNT
+                            :value= tranDetails[0].MASTER_TRAN_AMOUNT
                             v-model="tutarPost"
                             name="tutarPost"
                             solo
@@ -164,7 +149,8 @@
                             <v-textarea
                             solo
                             name="aciklamaPost"
-                            label="Açıklama"
+                            :label= tranDetails[0].MASTER_TRAN_NOTE
+                            :value= tranDetails[0].MASTER_TRAN_NOTE
                             v-model="aciklamaPost"
                             ></v-textarea>
                             </v-col>
@@ -223,9 +209,6 @@ export default {
             userIdPost: '',
             Liste: [],
         }
-    },
-    mounted() {
-        this.$store.dispatch("loadFaturaDetay");
     },
     computed: {
         ...mapState(["tranDetails"]),

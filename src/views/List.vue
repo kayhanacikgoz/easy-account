@@ -15,7 +15,7 @@
   </v-card>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "List",
@@ -43,14 +43,23 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'loadFaturaDetay',
+    ]),
     expandRow(row) {
       this.tranItems.map((item, index) => {
         item.selected = item === row
         this.$set(this.tranItems, index, item)
-    })
-      this.$router.push({name: 'FaturaDetay', params: {id : row.MASTER_TRAN_ID}})
+      })
+      this.loadFaturaDetay(row.MASTER_TRAN_ID)
+      
+      this.$router.push({name: 'FaturaDetay', params: {id : row.MASTER_TRAN_ID  }})    
+
     }
+  
+  
   },
+
   mounted() {
     this.$store.dispatch("loadTranList");
   },
