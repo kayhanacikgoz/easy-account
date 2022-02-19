@@ -9,7 +9,7 @@
     <v-card-title>
       <v-text-field v-model="search" append-icon="mdi-magnify" label="Ara" single-line hide-details></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="tranItems" class="elevation-1" :search="search">
+    <v-data-table :headers="headers" :items="tranItems" class="elevation-1" :search="search" @click:row="expandRow">
 
     </v-data-table>
   </v-card>
@@ -43,9 +43,14 @@ export default {
   },
 
   methods: {
-    
+    expandRow(row) {
+      this.tranItems.map((item, index) => {
+        item.selected = item === row
+        this.$set(this.tranItems, index, item)
+    })
+      this.$router.push({name: 'FaturaDetay', params: {id : row.MASTER_TRAN_ID}})
+    }
   },
-
   mounted() {
     this.$store.dispatch("loadTranList");
   },

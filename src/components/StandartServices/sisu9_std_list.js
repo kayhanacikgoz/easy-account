@@ -19,9 +19,9 @@ export default class sisu9_std_list {
           'Content-type': 'application/x-www-form-urlencoded'
         });
           for (var i=0 ; i<res.data.dvojka.Liste.length ; i++) {
-              //const listItem = new sisu9_combobox(res.data.dvojka.Liste[i].STD_ID,res.data.dvojka.Liste[i].Label);
-              let listItem = { 'value': res.data.dvojka.Liste[i].STD_ID, 'text': res.data.dvojka.Liste[i].Label}       
-              this.Liste.push(listItem);  
+            //const listItem = new sisu9_combobox(res.data.dvojka.Liste[i].STD_ID,res.data.dvojka.Liste[i].Label);
+            let listItem = { 'value': res.data.dvojka.Liste[i].STD_ID, 'text': res.data.dvojka.Liste[i].Label}       
+            this.Liste.push(listItem);  
           }
           
         } catch (e) {

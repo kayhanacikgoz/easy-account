@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     userInfo:[],
     reportItems:[],
+    tranDetails: [],
     tranItems: [],
     isGiris: false,
   },
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     loadTranList(state, tranItems) {
       state.tranItems = tranItems;
     },
+    loadDetail(state,tranDetails) {
+      state.tranDetails = tranDetails;
+    }
   },
   actions: {
     updateIsGiris: ({ commit }) => {
@@ -99,6 +103,19 @@ export default new Vuex.Store({
         }).then(response => response.data.tran_list).then(tranItems => {
           console.log(tranItems);
           commit('loadTranList', tranItems)
+        })
+    },
+    loadFaturaDetay({ commit }) {
+      let formDataDetail = new FormData();
+
+      formDataDetail.append('islem_id', 40);
+
+      axios.post(
+        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction", formDataDetail, {
+          headers: {'Content-type' : 'application/x-www-form-urlencoded'}
+        }).then(response => response.data.transaction).then(tranDetails => {
+          console.log(tranDetails);
+          commit('loadDetail', tranDetails)
         })
     },
   },
