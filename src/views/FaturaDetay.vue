@@ -37,7 +37,7 @@
                             sm="2"
                         >
                             <v-text-field
-                                value= "0"
+                                :value= tranDetails[0].MASTER_TRAN_ID
                                 label="Numara"
                                 filled
                                 
@@ -59,7 +59,7 @@
                             <v-select
                             item-text="text"
                             item-value="value"
-                            label="Firma"
+                            :label="tranDetails[0].SUBCOMP_LABEL"
                             v-model="firmaPost"
                             name="firmaPost"
                             outlined
@@ -74,7 +74,7 @@
                             <v-select
                             item-text="text"
                             item-value="value"
-                            label="Hesap Türü"
+                            :label="tranDetails[0].SUBCOMP_LABEL"
                             v-model="hesapTuruPost"
                             name="hesapTuruPost"
                             outlined
@@ -200,6 +200,7 @@ export default {
     name: 'FaturaDetay',
     data() {
         return {
+            name: 'AHmet',
             id: '',
             title: '',
             paraBirimi: [],
