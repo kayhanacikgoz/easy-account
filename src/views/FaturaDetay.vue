@@ -57,7 +57,6 @@
                             sm="4"
                         >
                             <v-select
-                            :items="firma"
                             item-text="text"
                             item-value="value"
                             label="Firma"
@@ -73,7 +72,6 @@
                             sm="4"
                         >
                             <v-select
-                            :items="hesapTuru"
                             item-text="text"
                             item-value="value"
                             label="Hesap Türü"
@@ -90,7 +88,6 @@
                             sm="4"
                             >
                                 <v-select
-                                :items="durum"
                                 item-text="text"
                                 item-value="value"
                                 label="Durum"
@@ -138,7 +135,6 @@
                             sm="4"
                             >
                             <v-select
-                            :items="paraBirimi"
                             item-text="text"
                             item-value="value"
                             label="Para Birimi"
@@ -175,7 +171,6 @@
                         </v-row>
                         <v-row>
                             <v-btn
-                            v-on:click="addFatura"
                             x-large
                             color="info"
                             dark
@@ -206,11 +201,30 @@ export default {
     data() {
         return {
             id: '',
-            title: ''
+            title: '',
+            paraBirimi: [],
+            menu: false,
+            durum: [],
+            hesapTuru: [],
+            firma: [],
+            tutar: '',
+            aciklama: '',
+            autoUpdate: true,
+            isUpdating: false,
+            firmaIndex: null,
+            paraBirimiPost: null,
+            durumPost: null,
+            hesapTuruPost: null,
+            firmaPost: null,
+            tutarPost: '',
+            aciklamaPost: '',
+            datePost: '',
+            userIdPost: '',
+            Liste: [],
         }
     },
     mounted() {
-        this.$store.dispatch("loadDetail");
+        this.$store.dispatch("loadFaturaDetay");
     },
     computed: {
         ...mapState(["tranDetails"]),

@@ -40,7 +40,7 @@ export default new Vuex.Store({
     loadTranList(state, tranItems) {
       state.tranItems = tranItems;
     },
-    loadDetail(state,tranDetails) {
+    loadFaturaDetay(state,tranDetails) {
       state.tranDetails = tranDetails;
     }
   },
@@ -115,7 +115,7 @@ export default new Vuex.Store({
           headers: {'Content-type' : 'application/x-www-form-urlencoded'}
         }).then(response => response.data.transaction).then(tranDetails => {
           console.log(tranDetails);
-          commit('loadDetail', tranDetails)
+          commit('loadFaturaDetay', tranDetails)
         })
     },
   },
