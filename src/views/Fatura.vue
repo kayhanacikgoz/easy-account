@@ -73,36 +73,54 @@
                         </v-col>
                         </v-row>
                         <v-row>
+                            
                             <v-col
                             class="d-flex"
                             cols="12"
-                            sm="6"
+                            sm="4"
+                            md="4"
                             >
                                 <v-select
-                                :items="durum"
-                                item-text="text"
-                                item-value="value"
-                                label="Durum"
-                                v-model="durumPost"
-                                name="durumPost"
-                                solo
+                                    :items="paraBirimi"
+                                    item-text="text"
+                                    item-value="value"
+                                    label="Para Birimi"
+                                    v-model="paraBirimiPost"
+                                    name="paraBirimiPost"
+                                    solo
                                 ></v-select>
                             </v-col>  
                             <v-col
                             class="d-flex"
                             cols="12"
-                            sm="6"
-                            md="6"
+                            sm="4"
+                            md="4"
                             >
-                            <v-select
-                            :items="paraBirimi"
-                            item-text="text"
-                            item-value="value"
-                            label="Para Birimi"
-                            v-model="paraBirimiPost"
-                            name="paraBirimiPost"
-                            solo
-                            ></v-select>
+                                <v-select
+                                    :items="partnertype"
+                                    item-text="text"
+                                    item-value="value"
+                                    label="Partner"
+                                    v-model="partnertypePost"
+                                    name="partnertypePost"
+                                    solo
+                                ></v-select>
+                            </v-col>  
+                            <v-col
+                            class="d-flex"
+                            cols="12"
+                            sm="4"
+                            md="4"
+                            >
+                                <v-select
+                                    :items="donem"
+                                    item-text="text"
+                                    item-value="value"
+                                    label="Dönem"
+                                    v-model="donemPost"
+                                    name="donemPost"
+                                    solo
+                                ></v-select>
                             </v-col>  
                         </v-row>
                         </v-row>
@@ -173,6 +191,8 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
             durum: [],
             hesapTuru: [],
             firma: [],
+            donem: [],
+            partnertype: [],
             tutar: '',
             aciklama: '',
             autoUpdate: true,
@@ -183,8 +203,8 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
             firmaPost: null,
             tutarPost: '',
             aciklamaPost: '',
-            datePost: '',
-            userIdPost: '',
+            donemPost: '',
+            partnertypePost: '',
             Liste: [],
         }
     },
@@ -192,31 +212,28 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
         //
     },
     async created() {
-        let std_list = new sisu9_std_list('status');
-        std_list.callService();
-        this.durum = std_list.Liste
 
-        std_list = new sisu9_std_list('accountype')
+        let std_list = new sisu9_std_list('accountype');
         std_list.callService();
         this.hesapTuru = std_list.Liste
 
-        std_list = new sisu9_std_list('company')
+        std_list = new sisu9_std_list('company');
         std_list.callService();
         this.firma = std_list.Liste
-
-        /*std_list = new sisu9_std_list('donem')
-        std_list.callService();
-        this.donem = std_list.Liste*/
 
         std_list = new sisu9_std_list('donem')
         std_list.callService();
         this.donem = std_list.Liste
 
-        std_list = new sisu9_std_list('usertype')
+        std_list = new sisu9_std_list('partnertype');
+        std_list.callService();
+        this.partnertype = std_list.Liste
+
+        std_list = new sisu9_std_list('usertype');
         std_list.callService();
         this.kullaniciTipi = std_list.Liste
 
-        std_list = new sisu9_std_list('currency')
+        std_list = new sisu9_std_list('currency');
         std_list.callService();
         this.paraBirimi = std_list.Liste
     }, 
