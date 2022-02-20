@@ -92,6 +92,7 @@
                             sm="6"
                             >
                                 <v-select
+                                :items = paraBirimi 
                                 item-text="text"
                                 item-value="value"
                                 :label= tranDetails[0].SUBCURR_LABEL
@@ -133,6 +134,7 @@
                     </v-row>
                     <v-row>
                         <v-btn
+                        v-on:click="updateFatura"
                         x-large
                         color="info"
                         dark
@@ -151,6 +153,7 @@
 <script>
 import { mapState } from "vuex";
 import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
+import axios from 'axios'
 export default {
     name: 'FaturaDetay',
     data() {
@@ -208,6 +211,31 @@ export default {
         std_list.callService();
         this.paraBirimi = std_list.Liste
     }, 
+    methods: {
+        async updateFatura() {
+
+            let formData = new FormData();
+            formData.append('islem_id', this.tranDetails[0].MASTER_TRAN_ID)
+            formData.append('company_id', this.firmaPost);
+            formData.append('tutar', this.tutarPost);
+            formData.append('account_type', this.hesapTuruPost);
+            formData.append('currency_type', this.paraBirimiPost);
+            formData.append('note', this.aciklamaPost);
+            formData.append('partner_id', 6);
+            formData.append('trans_date', "2022-05-05");
+            formData.append('tran_user_id', 2);
+
+            let result = await axios.post ( "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_edit",
+            formData,{'Content-type': 'application/x-www-form-urlencoded'} )
+
+            if (result.status==200 && result.data.msg.MSG_TYPE =="S") {
+                alert(result.data.msg.MSG_CONTENT)
+                console.log(result.data.transaction)
+            } else {
+                alert(result.data.msg.MSG_CONTENT)
+            }
+        },
+    },
     computed: {
         ...mapState(["tranDetails"]),
     },
