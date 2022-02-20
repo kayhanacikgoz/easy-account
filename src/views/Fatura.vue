@@ -8,42 +8,15 @@
     class="pa-8"
   >
     <v-row>
-        <v-container class="d-flex justify-space-around flex-wrap">
+        <v-container class="d-flex justify-start flex-wrap">
             <v-btn
+            large
             to="home"
             color="info"
             class="ma-2 white--text"
             >
                 <v-icon left dark>mdi-home</v-icon>
                 Anasayfa
-            </v-btn>
-            <v-btn
-            color="success"
-            class="ma-2 white--text"
-            >
-                <v-icon left dark>mdi-format-list-bulleted</v-icon>
-                Ekle 
-            </v-btn>
-            <v-btn
-            color="warning"
-            class="ma-2 white--text"
-            >
-                <v-icon left dark>mdi-pencil</v-icon>
-                Düzenle
-            </v-btn>
-            <v-btn
-            color="secondary"
-            class="ma-2 white--text"
-            >
-                <v-icon left dark>mdi-eye</v-icon>
-                Gürüntüle   
-            </v-btn>
-            <v-btn
-            color="error"
-            class="ma-2 white--text"
-            >
-            <v-icon left dark>mdi-delete</v-icon>
-            Sİl 
             </v-btn>
         </v-container>
     </v-row>
@@ -70,59 +43,7 @@
                         <v-col
                             class="d-flex"
                             cols="12"
-                            sm="3"
-                        >
-                            <!--<v-menu
-                                ref="menu"
-                                v-model="menu"
-                                :close-on-content-click="false"
-                                :return-value.sync="dates"
-                                transition="scale-transition"
-                                offset-y
-                                min-width="auto"
-                            >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-combobox
-                                        v-model="dates"
-                                        multiple
-                                        chips
-                                        small-chips
-                                        label="Vade Tarihi"
-                                        prepend-icon="mdi-calendar"
-                                        readonly
-                                        v-bind="attrs"
-                                        v-on="on"
-                                    ></v-combobox>
-                                </template>
-                                <v-date-picker
-                                v-model="dates"
-                                multiple
-                                no-title
-                                scrollable
-                                >
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    text
-                                    color="primary"
-                                    @click="menu = false"
-                                >
-                                    Cancel
-                                </v-btn>
-                                <v-btn
-                                    text
-                                    color="primary"
-                                    @click="$refs.menu.save(dates)"
-                                >
-                                    OK
-                                </v-btn>
-                                </v-date-picker>
-                            </v-menu>-->
-                        </v-col>
-
-                        <v-col
-                            class="d-flex"
-                            cols="12"
-                            sm="4"
+                            sm="5"
                         >
                             <v-select
                             :items="firma"
@@ -138,7 +59,7 @@
                         <v-col
                             class="d-flex"
                             cols="12"
-                            sm="4"
+                            sm="5"
                         >
                             <v-select
                             :items="hesapTuru"
@@ -155,7 +76,7 @@
                             <v-col
                             class="d-flex"
                             cols="12"
-                            sm="4"
+                            sm="6"
                             >
                                 <v-select
                                 :items="durum"
@@ -166,44 +87,12 @@
                                 name="durumPost"
                                 solo
                                 ></v-select>
-                            </v-col>               
-                        <v-col
-                            class="d-flex"
-                            cols="12"
-                            sm="4"
-                            >
-                                <!-- <v-select
-                                :items="kullaniciTipi"
-                                item-text="text"
-                                item-value="value"
-                                label="Kullanıcı Tipi"
-                                v-model="kullaniciTipiPost"
-                                name="kullaniciTipiPost"
-                                solo
-                                ></v-select> -->
-                            </v-col>   
-                        <v-col
-                        class="d-flex"
-                        cols="12"
-                        sm="4"
-                        >
-                            <!-- <v-select
-                            :items="donem"
-                            item-text="text"
-                            item-value="value"
-                            label="Cari Dönem"
-                            v-model="donemPost"
-                            name="donemPost"
-                            solo
-                            ></v-select> -->
-                        </v-col>   
-                        </v-row>
-                        </v-row>
-                        <v-row>
+                            </v-col>  
                             <v-col
                             class="d-flex"
                             cols="12"
-                            sm="4"
+                            sm="6"
+                            md="6"
                             >
                             <v-select
                             :items="paraBirimi"
@@ -214,11 +103,15 @@
                             name="paraBirimiPost"
                             solo
                             ></v-select>
-                            </v-col>   
+                            </v-col>  
+                        </v-row>
+                        </v-row>
+                        <v-row>
+                             
                             <v-col
                             cols="12"
-                            sm="4"
-                            md="4"
+                            sm="6"
+                            md="6"
                             >
                             <v-text-field
                             label="Tutar"
@@ -230,8 +123,8 @@
                             </v-col>
                             <v-col
                             cols="12"
-                            md="4"
-                            sm="4"
+                            md="6"
+                            sm="6"
                         >
                             <v-textarea
                             solo
@@ -250,14 +143,15 @@
                             >
                             kaydet
                             </v-btn>
-                            <v-btn 
+                            <!--<v-btn 
+                            to="Fatura"
                             x-large
                             class="ml-5"
                             color="red"
                             dark
                             >
                             temizle
-                            </v-btn>
+                            </v-btn>-->
                         </v-row>
                 </v-container>
             </v-form> 
@@ -278,20 +172,15 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
             menu: false,
             durum: [],
             hesapTuru: [],
-            //donem: [],
             firma: [],
             tutar: '',
             aciklama: '',
-            //kullaniciTipi: [],
             autoUpdate: true,
             isUpdating: false,
-            firmaIndex: null,
             paraBirimiPost: null,
             durumPost: null,
             hesapTuruPost: null,
-            //donemPost: null,
             firmaPost: null,
-            //kullaniciTipiPost: null,
             tutarPost: '',
             aciklamaPost: '',
             datePost: '',
@@ -354,7 +243,6 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
                 alert("Kayıt eklenemedi!")
             }
         },
-        
     },
 }
 </script>
