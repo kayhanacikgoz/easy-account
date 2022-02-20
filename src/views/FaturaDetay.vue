@@ -74,31 +74,47 @@
                             <v-col
                             class="d-flex"
                             cols="12"
-                            sm="6"
+                            sm="4"
                             >
-                                <!--<v-select
-                                :items="durum"
+                                <v-select
+                                :items="donem"
                                 item-text="text"
                                 item-value="value"
-                                label="Durum"
-                                v-model="durumPost"
-                                name="durumPost"
+                                :label= tranDetails[0].MASTER_TRAN_DONEM
+                                v-model= "donemPost"
+                                name="donemPost"
                                 solo
-                                ></v-select>-->
-                            </v-col>      
+                                ></v-select>
+                            </v-col>    
                             <v-col
                             class="d-flex"
                             cols="12"
-                            sm="6"
+                            sm="4"
                             >
                                 <v-select
-                                :items = paraBirimi 
-                                item-text="text"
-                                item-value="value"
-                                :label= tranDetails[0].SUBCURR_LABEL
-                                v-model="paraBirimiPost"
-                                name="paraBirimiPost"
-                                solo
+                                    :items="partner"
+                                    item-text="text"
+                                    item-value="value"
+                                    label="Kayhan Açıkgöz"
+                                    v-model= "partnerPost"
+                                    name="partnerPost"
+                                    disabled
+                                    solo
+                                ></v-select>
+                            </v-col>    
+                            <v-col
+                            class="d-flex"
+                            cols="12"
+                            sm="4"
+                            >
+                                <v-select
+                                    :items = paraBirimi 
+                                    item-text="text"
+                                    item-value="value"
+                                    :label= tranDetails[0].SUBCURR_LABEL
+                                    v-model= "paraBirimiPost"
+                                    name="paraBirimiPost"
+                                    solo
                                 ></v-select>
                             </v-col>            
                         </v-row>
@@ -166,19 +182,20 @@ export default {
             durum: [],
             hesapTuru: [],
             firma: [],
+            donem: [],
+            partner: [],
             tutar: '',
             aciklama: '',
             autoUpdate: true,
             isUpdating: false,
-            firmaIndex: null,
             paraBirimiPost: null,
             durumPost: null,
             hesapTuruPost: null,
             firmaPost: null,
             tutarPost: '',
+            partnerPost: '',
             aciklamaPost: '',
-            datePost: '',
-            userIdPost: '',
+            donemPost: '',
             Liste: [],
         }
     },
@@ -195,10 +212,6 @@ export default {
         std_list.callService();
         this.firma = std_list.Liste
 
-        /*std_list = new sisu9_std_list('donem')
-        std_list.callService();
-        this.donem = std_list.Liste*/
-
         std_list = new sisu9_std_list('donem')
         std_list.callService();
         this.donem = std_list.Liste
@@ -213,7 +226,13 @@ export default {
     }, 
     methods: {
         async updateFatura() {
-
+            if (this.paraBirimiPost == null) {this.paraBirimiPost = this.tranDetails[0].MASTER_TRAN_CURRENCY;}
+            if (this.firmaPost == null) {this.firmaPost = this.tranDetails[0].MASTER_TRAN_COMPANY;}
+            if (this.tutarPost == '') {this.tutarPost = this.tranDetails[0].MASTER_TRAN_AMOUNT;}
+            if (this.hesapTuruPost == null) {this.hesapTuruPost = this.tranDetails[0].MASTER_TRAN_ACCOUNT;}
+            if (this.aciklamaPost == '') {this.aciklamaPost = this.tranDetails[0].MASTER_TRAN_NOTE;}
+            if (this.donemPost == null) {this.donemPost = this.tranDetails[0].MASTER_TRAN_DONEM;}
+            
             let formData = new FormData();
             formData.append('islem_id', this.tranDetails[0].MASTER_TRAN_ID)
             formData.append('company_id', this.firmaPost);
