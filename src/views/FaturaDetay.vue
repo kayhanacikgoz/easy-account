@@ -72,7 +72,7 @@
                       :items="partner"
                       item-text="text"
                       item-value="value"
-                      label="Kayhan Açıkgöz"
+                      :label="tranDetails[0].PARTNER_NAME"
                       v-model="partnerPost"
                       name="partnerPost"
                       disabled

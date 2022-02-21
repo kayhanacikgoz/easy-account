@@ -10,6 +10,7 @@ export default new Vuex.Store({
     reportItems:[],
     tranDetails: [],
     tranItems: [],
+    partnerItems: [],
     isGiris: false,
   },
   getters: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     tranItems: state => {
       return state.tranItems;
+    },
+    partnerItems: state => {
+      return state.partnerItems;
     },
    
   },
@@ -42,6 +46,9 @@ export default new Vuex.Store({
     },
     loadFaturaDetay(state,tranDetails) {
       state.tranDetails = tranDetails;
+    },
+    loadPartnerList(state,partnerItems) {
+      state.partnerItems = partnerItems;
     }
   },
   actions: {
@@ -118,6 +125,21 @@ export default new Vuex.Store({
           commit('loadFaturaDetay', tranDetails);
         })
     },
+
+    loadPartnerList({ commit }) {
+      /* let formDataPartner = new FormData();
+
+      formDataPartner.append('none', 'none'); */
+
+      axios.post(
+        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=partner_list", {
+          headers: {'Content-type' : 'application/x-www-form-urlencoded'}
+        }).then(response => response.data.partner_list).then(partnerItems => {
+          console.log(partnerItems);
+          commit('loadPartnerList', partnerItems)
+        })
+    },
+    
   },
   modules: {
   }
