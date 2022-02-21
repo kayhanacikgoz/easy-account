@@ -250,8 +250,9 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
 
             if (result.status==200 && result.data.msg.MSG_TYPE =="S") {
                 //alert(result.data.msg.MSG_CONTENT)
-                console.log(result.data.transaction)
-                 this.$router.push("/fatura");
+                this.$router.go();
+                //console.log(result.data.transaction)
+                 //this.$router.push("/fatura");
             } else {
                 alert("Kayıt eklenemedi!")
             }

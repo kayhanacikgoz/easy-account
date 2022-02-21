@@ -264,6 +264,7 @@ export default {
         //alert(result.data.msg.MSG_CONTENT)
         //console.log(result.data.transaction)
         this.$router.push("/list");
+           
       } else {
         alert(result.data.msg.MSG_CONTENT);
       }
