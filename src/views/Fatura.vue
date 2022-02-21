@@ -7,19 +7,14 @@
     elevation="10"
     class="pa-8"
   >
-    <v-row>
-        <v-container class="d-flex justify-start flex-wrap">
-            <v-btn
-            large
-            to="home"
-            color="info"
-            class="ma-2 white--text"
-            >
-                <v-icon left dark>mdi-home</v-icon>
-                Anasayfa
-            </v-btn>
-        </v-container>
-    </v-row>
+   <v-row>
+    <router-link to="home" class="text-decoration-none">
+      <v-btn class="mx-3 my-2" color="orange" fab small dark>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+    </router-link>
+     <h1 class="mx-3 my-2">Yeni Fatura</h1>
+     </v-row>
     <v-divider class="my-5"></v-divider>
     <v-row>
         <v-container>
@@ -155,7 +150,7 @@
                         <v-row>
                             <v-btn
                             v-on:click="addFatura"
-                            x-large
+                           
                             color="info"
                             dark
                             >
@@ -254,8 +249,9 @@ import sisu9_std_list from '../components/StandartServices/sisu9_std_list'
             formData,{'Content-type': 'application/x-www-form-urlencoded'} )
 
             if (result.status==200 && result.data.msg.MSG_TYPE =="S") {
-                alert(result.data.msg.MSG_CONTENT)
+                //alert(result.data.msg.MSG_CONTENT)
                 console.log(result.data.transaction)
+                 this.$router.push("/fatura");
             } else {
                 alert("Kayıt eklenemedi!")
             }

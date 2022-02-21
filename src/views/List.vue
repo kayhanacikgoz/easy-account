@@ -1,11 +1,14 @@
 <template>
+
   <v-card class="mx-5 my-5">
-    <h1 class="mx-3 my-2">Fatura Listesi</h1>
+      <v-row class="mx-3 my-6">
     <router-link to="home" class="text-decoration-none">
       <v-btn class="mx-3 my-2" color="orange" fab small dark>
-        <v-icon>mdi-arrow-left</v-icon>
+        <v-icon>mdi-home</v-icon>
       </v-btn>
     </router-link>
+    <h1 class="mx-3 my-2">Fatura Listesi</h1>
+    </v-row>
     <v-card-title>
       <v-text-field v-model="search" append-icon="mdi-magnify" label="Ara" single-line hide-details></v-text-field>
     </v-card-title>
@@ -13,6 +16,7 @@
 
     </v-data-table>
   </v-card>
+  
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
