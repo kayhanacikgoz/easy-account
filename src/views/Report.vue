@@ -1,6 +1,5 @@
 <template>
-
-  <v-card class="mx-6 my-6 ">
+  <v-card class="mx-6 my-6">
     <h1 class="mx-3 my-2">Özet Raporlar</h1>
     <router-link to="home" class="text-decoration-none">
       <v-btn class="mx-3 my-2" color="orange" fab small dark>
@@ -46,6 +45,7 @@ export default {
         { text: "Alış", value: "Alış" },
         { text: "Ödeme", value: "Ödeme" },
       ],
+      //reportItems: [],
     };
   },
 
@@ -68,7 +68,7 @@ export default {
 
 <style>
 h1 {
-color:gray;
+  color: gray;
 }
 .v-chip .v-chip__content {
   min-width: 100px;
