@@ -12,7 +12,7 @@
     <v-card-title>
       <v-text-field v-model="search" append-icon="mdi-magnify" label="Ara" single-line hide-details></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="tranItems" class="elevation-1" :search="search" @click:row="expandRow">
+    <v-data-table :headers="headers" :items="tranItems" style="cursor:pointer" class="elevation-1" :search="search" @click:row="expandRow">
 
     </v-data-table>
   </v-card>
@@ -73,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 h1 {
 color:gray;
 }

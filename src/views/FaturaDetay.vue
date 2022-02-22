@@ -69,14 +69,14 @@
                   </v-col>
                   <v-col class="d-flex" cols="12" sm="4">
                     <v-select
-                      :items="partner"
-                      item-text="text"
-                      item-value="value"
+                      :items="partnerItems"
+                      item-text="MASTER_PARTNER_NAME"
+                      item-value="MASTER_PARTNER_ID"
                       :label="tranDetails[0].PARTNER_NAME"
-                      v-model="partnerPost"
-                      name="partnerPost"
+                      v-model="loadPartnerList"
+                      name="loadPartnerList"
+                      outlined
                       disabled
-                      solo
                     ></v-select>
                   </v-col>
                   <v-col class="d-flex" cols="12" sm="4">
@@ -181,7 +181,7 @@ export default {
       hesapTuru: [],
       firma: [],
       donem: [],
-      partner: [],
+      loadPartnerList: [],
       tutar: "",
       aciklama: "",
       autoUpdate: true,
@@ -223,6 +223,8 @@ export default {
     std_list = new sisu9_std_list("currency");
     std_list.callService();
     this.paraBirimi = std_list.Liste;
+
+    this.$store.dispatch("loadPartnerList");
   },
   methods: {
     async updateFatura() {
@@ -252,7 +254,7 @@ export default {
       formData.append("account_type", this.hesapTuruPost);
       formData.append("currency_type", this.paraBirimiPost);
       formData.append("note", this.aciklamaPost);
-      formData.append("partner_id", 6);
+      formData.append("partner_id", this.loadPartnerList);
       formData.append("trans_date", "2022-05-05");
       formData.append("tran_user_id", 2);
 
@@ -287,7 +289,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["tranDetails"]),
+    ...mapState(["tranDetails","partnerItems"]),
   },
 };
 </script>

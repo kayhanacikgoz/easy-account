@@ -45,7 +45,7 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="d-flex" cols="12" sm="5">
+                  <v-col class="d-flex" cols="12" sm="4">
                     <v-select
                       :items="partnerItems"
                       item-text="MASTER_PARTNER_NAME"
@@ -57,7 +57,7 @@
                     ></v-select>
                   </v-col>
 
-                  <v-col class="d-flex" cols="12" sm="4" md="4">
+                  <!--<v-col class="d-flex" cols="12" sm="4" md="4">
                     <v-select
                       :items="partnertype"
                       item-text="text"
@@ -67,6 +67,9 @@
                       name="partnertypePost"
                       solo
                     ></v-select>
+                  </v-col>-->
+                  <v-col class="d-flex" cols="12" sm="4" md="4">
+                    <v-select :items="donem" item-text="text" item-value="value" label="Dönem" v-model="donemPost" name="donemPost" solo></v-select>
                   </v-col>
                   <v-col class="d-flex" cols="12" sm="4" md="4">
                     <v-select
@@ -79,18 +82,16 @@
                       solo
                     ></v-select>
                   </v-col>
-                  <v-col class="d-flex" cols="12" sm="4" md="4">
-                    <v-select :items="donem" item-text="text" item-value="value" label="Dönem" v-model="donemPost" name="donemPost" solo></v-select>
-                  </v-col>
-                </v-row>
-              </v-row>
-              <v-row>
-                <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="6" md="6">
                   <v-text-field label="Tutar" v-model="tutarPost" name="tutarPost" solo dense></v-text-field>
                 </v-col>
                 <v-col cols="12" md="6" sm="6">
                   <v-textarea solo name="aciklamaPost" label="Açıklama" v-model="aciklamaPost"></v-textarea>
                 </v-col>
+                </v-row>
+              </v-row>
+              <v-row>
+                
               </v-row>
               <v-row>
                 <v-btn v-on:click="addFatura" color="info" dark> kaydet </v-btn>
