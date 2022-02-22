@@ -56,7 +56,7 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="d-flex" cols="12" sm="4">
+                  <!-- <v-col class="d-flex" cols="12" sm="4">
                     <v-select
                       :items="donem"
                       item-text="text"
@@ -66,6 +66,21 @@
                       name="donemPost"
                       solo
                     ></v-select>
+                  </v-col> -->
+                  <v-col cols="12" sm="6" md="4">
+                    <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="tarihPost"
+                          :label="tranDetails[0].MASTER_TRAN_DATE"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="tarihPost" @input="menu2 = false"></v-date-picker>
+                    </v-menu>
                   </v-col>
                   <v-col class="d-flex" cols="12" sm="4">
                     <v-select
@@ -197,6 +212,9 @@ export default {
       Liste: [],
       dialog_edit: false,
       dialog_delete: false,
+      tarihPost: "",
+       modal: false,
+      menu2: false,
     };
   },
   async created() {
@@ -212,9 +230,9 @@ export default {
     std_list.callService();
     this.firma = std_list.Liste;
 
-    std_list = new sisu9_std_list("donem");
+    /* std_list = new sisu9_std_list("donem");
     std_list.callService();
-    this.donem = std_list.Liste;
+    this.donem = std_list.Liste; */
 
     std_list = new sisu9_std_list("usertype");
     std_list.callService();
@@ -243,9 +261,15 @@ export default {
       if (this.aciklamaPost == "") {
         this.aciklamaPost = this.tranDetails[0].MASTER_TRAN_NOTE;
       }
-      if (this.donemPost == null) {
+      /* if (this.donemPost == null) {
         this.donemPost = this.tranDetails[0].MASTER_TRAN_DONEM;
+      } */
+      if (this.loadPartnerList == "") {
+        this.loadPartnerList = this.tranDetails[0].MASTER_TRAN_PARTNER;
       }
+     /*  if (this.tarihPost == "") {
+        this.tarihPost = this.tranDetails[0].MASTER_TRAN_DATE;
+      } */
 
       let formData = new FormData();
       formData.append("islem_id", this.tranDetails[0].MASTER_TRAN_ID);
@@ -255,7 +279,7 @@ export default {
       formData.append("currency_type", this.paraBirimiPost);
       formData.append("note", this.aciklamaPost);
       formData.append("partner_id", this.loadPartnerList);
-      formData.append("trans_date", "2022-05-05");
+      formData.append("trans_date", this.tarihPost);
       formData.append("tran_user_id", 2);
 
       let result = await axios.post("https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_edit", formData, {
@@ -264,7 +288,7 @@ export default {
 
       if (result.status == 200 && result.data.msg.MSG_TYPE == "S") {
         //alert(result.data.msg.MSG_CONTENT)
-        //console.log(result.data.transaction)
+        console.log(result.data.transaction)
         this.$router.push("/list");
            
       } else {
