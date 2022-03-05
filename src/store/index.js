@@ -30,12 +30,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    updateIsGiris: (state) => {
-      state.isGiris = true;
-    },
-    updateIsCikis: (state) => {
-      state.isGiris = false;
-    },
     loadUserInfo(state, userInfo) {
       state.userInfo = userInfo;
     },
@@ -58,6 +52,13 @@ export default new Vuex.Store({
       } 
     },
     setAuthentication(state) {
+      window.localStorage.setItem('sagdiclar_authenticated',JSON.stringify(state.sagdiclar_authenticated));
+    },
+    logout(state){
+      state.sagdiclar_authenticated = null;
+      this.commit('setLogout');
+    },
+    setLogout(state) {
       window.localStorage.setItem('sagdiclar_authenticated',JSON.stringify(state.sagdiclar_authenticated));
     },
   },

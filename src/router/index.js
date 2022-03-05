@@ -17,6 +17,8 @@ const routes = [
         next("/home");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
@@ -25,10 +27,12 @@ const routes = [
     name: 'Home',
     component: Home,
     beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated == null ) {
+      if(store.state.sagdiclar_authenticated == "null" ) {
         next("/login");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
@@ -41,6 +45,8 @@ const routes = [
         next("/home");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
@@ -56,6 +62,8 @@ const routes = [
         next("/login");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
@@ -71,6 +79,8 @@ const routes = [
         next("/login");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
@@ -86,6 +96,8 @@ const routes = [
         next("/login");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
@@ -101,6 +113,8 @@ const routes = [
         next("/login");
       } else {
         next();
+        from();
+        to();
       }
     }
   },
