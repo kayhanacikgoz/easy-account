@@ -1,22 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import Home from '../views/Home.vue'
+import Login from '../views/Login'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/home',
-    name: 'Home',
-    component: Home
+    path: '/',
+    redirect: {
+      name: 'Login',
+    },
+    beforeEnter: (to, from, next) => {
+      if(store.state.authenticated == "true" ) {
+        next("/home");
+      } else {
+        next();
+      }
+    }
   },
   {
-    path: '/',
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    beforeEnter: (to, from, next) => {
+      if(store.state.sagdiclar_authenticated == null ) {
+        next("/login");
+      } else {
+        next();
+      }
+    }
+  },
+  {
+    path: '/login',
     name: 'Login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if(store.state.sagdiclar_authenticated == "true" ) {
+        next("/home");
+      } else {
+        next();
+      }
+    }
   },
   {
     path: '/fatura',
@@ -24,7 +50,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Fatura.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Fatura.vue'),
+    beforeEnter: (to, from, next) => {
+      if(store.state.sagdiclar_authenticated == null ) {
+        next("/login");
+      } else {
+        next();
+      }
+    }
   },
   {
     path: '/list',
@@ -32,7 +65,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/List.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/List.vue'),
+    beforeEnter: (to, from, next) => {
+      if(store.state.sagdiclar_authenticated == null ) {
+        next("/login");
+      } else {
+        next();
+      }
+    }
   },
   {
     path: '/report',
@@ -40,7 +80,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Report.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Report.vue'),
+    beforeEnter: (to, from, next) => {
+      if(store.state.sagdiclar_authenticated == null ) {
+        next("/login");
+      } else {
+        next();
+      }
+    }
   },
   {
     path: '/faturadetay/:id',
@@ -48,7 +95,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/FaturaDetay.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/FaturaDetay.vue'),
+    beforeEnter: (to, from, next) => {
+      if(store.state.sagdiclar_authenticated == null ) {
+        next("/login");
+      } else {
+        next();
+      }
+    }
   },
 ]
 

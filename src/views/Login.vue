@@ -58,51 +58,39 @@
 
 <script>
 import axios from 'axios'
-import { mapActions } from 'vuex';
 
 export default {
   data() {
     return {
       email: '',
       password: '',
-      state: '',
-      isGiris: Boolean,
-      user:''
 
     }
   },
   methods: {
-    ...mapActions(['updateIsGiris']),
-  
     async login() {
 
       let formData = new FormData();
 
-        formData.append('email', this.email);
-        formData.append('password', this.password);
-            
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+              
       let result = await axios.post(
-        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=login",
-        formData,
-        {
-        'Content-type': 'application/x-www-form-urlencoded'
-      }
-        
+          "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=login",
+          formData,
+          {
+          'Content-type': 'application/x-www-form-urlencoded'
+          }  
       )
+      console.log(result)
       if (result.status==200 && result.data.MSG_TYPE =="S") {
-        this.updateIsGiris();
-        console.log(formData)
-        //Member info servisi çağrılacak!!!
-        this.$router.push({name: 'Home'})
-        import('../views/Home.vue')
-        // mert
-        
+          let userLogin = result.data.MSG_TYPE;
+          this.$store.commit('login', userLogin)
+          this.$router.push({name: 'Home'})
       } else {
-        this.state = true
+          alert("Lütfen giriş yapınız!")
       }
-
     }
-    
   },
  
 }

@@ -4,6 +4,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+let sagdiclar_authenticated = window.localStorage.getItem('sagdiclar_authenticated');
+
 export default new Vuex.Store({
   state: {
     userInfo:[],
@@ -11,7 +13,7 @@ export default new Vuex.Store({
     tranDetails: [],
     tranItems: [],
     partnerItems: [],
-    isGiris: false,
+    sagdiclar_authenticated: sagdiclar_authenticated
   },
   getters: {
     userInfo: state => {
@@ -26,7 +28,6 @@ export default new Vuex.Store({
     partnerItems: state => {
       return state.partnerItems;
     },
-   
   },
   mutations: {
     updateIsGiris: (state) => {
@@ -49,7 +50,16 @@ export default new Vuex.Store({
     },
     loadPartnerList(state,partnerItems) {
       state.partnerItems = partnerItems;
-    }
+    },
+    login(state, userLogin) {
+      if (userLogin == "S"){
+        state.sagdiclar_authenticated = true
+        this.commit('setAuthentication');
+      } 
+    },
+    setAuthentication(state) {
+      window.localStorage.setItem('sagdiclar_authenticated',JSON.stringify(state.sagdiclar_authenticated));
+    },
   },
   actions: {
     updateIsGiris: ({ commit }) => {
