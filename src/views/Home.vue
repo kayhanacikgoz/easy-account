@@ -50,8 +50,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Home',
@@ -76,22 +75,16 @@ export default {
     }, 
     
   methods: {
-    ...mapActions(['updateIsCikis']),
      logout() {
             
-      let formData = new FormData();
-      formData.append('none','none');
-      let result =  axios.post(
+      /*let result =  axios.post(
         "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=logout",
-        formData,
         {
         'Content-type': 'application/x-www-form-urlencoded'
       }
-      )
-        this.updateIsCikis();
-        localStorage.setItem("user-info",JSON.stringify(result))
-        this.$router.push({name: 'Login'})
-        alert("Çıkış Yaptınız")
+      )*/
+      this.$store.commit('logout')
+      this.$router.push({name: 'Login'})  
     }
     
   },
