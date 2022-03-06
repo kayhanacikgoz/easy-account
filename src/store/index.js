@@ -90,7 +90,7 @@ export default new Vuex.Store({
       formDataReport.append('sayfano', null);
       formDataReport.append('bastarih', '2021-07-01');
       formDataReport.append('sontarih', '2022-11-30');
-      formDataReport.append('gosterim', 10);
+      formDataReport.append('gosterim', 999);
 
       axios.post(
         "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_report", formDataReport, {

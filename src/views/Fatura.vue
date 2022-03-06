@@ -211,9 +211,9 @@ export default {
 
       if (result.status == 200 && result.data.msg.MSG_TYPE == "S") {
         //alert(result.data.msg.MSG_CONTENT)
-        this.$router.go();
+        //this.$router.go();
         console.log(result.data.transaction)
-        //this.$router.push("/fatura");
+        this.$router.push("/fatura");
       } else {
         alert("Kayıt eklenemedi!");
       }
