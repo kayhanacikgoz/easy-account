@@ -4,8 +4,7 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-let sagdiclar_authenticated = Boolean;
-sagdiclar_authenticated = window.localStorage.getItem('sagdiclar_authenticated');
+let sagdiclar_authenticated = window.localStorage.getItem('sagdiclar_authenticated');
 
 export default new Vuex.Store({
   state: {

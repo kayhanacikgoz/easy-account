@@ -210,10 +210,9 @@ export default {
       });
 
       if (result.status == 200 && result.data.msg.MSG_TYPE == "S") {
-        //alert(result.data.msg.MSG_CONTENT)
-        //this.$router.go();
+        alert(result.data.msg.MSG_CONTENT)
         console.log(result.data.transaction)
-        this.$router.push("/fatura");
+        this.$router.go();
       } else {
         alert("Kayıt eklenemedi!");
       }

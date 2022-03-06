@@ -13,7 +13,7 @@ const routes = [
       name: 'Login',
     },
     beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated == "true" ) {
+      if(store.state.sagdiclar_authenticated == "true") {
         next("/home");
       } else {
         next();
@@ -41,7 +41,7 @@ const routes = [
     name: 'Login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated == "true" ) {
+      if(store.state.sagdiclar_authenticated == "true") {
         next("/home");
       } else {
         next();
@@ -75,7 +75,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/List.vue'),
     beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true" ) {
+      if(store.state.sagdiclar_authenticated != "true") {
         next("/login");
       } else {
         next();
@@ -92,7 +92,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Report.vue'),
     beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true" ) {
+      if(store.state.sagdiclar_authenticated != "true") {
         next("/login");
       } else {
         next();
@@ -109,7 +109,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/FaturaDetay.vue'),
     beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true" ) {
+      if(store.state.sagdiclar_authenticated != "true") {
         next("/login");
       } else {
         next();
