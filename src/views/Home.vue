@@ -60,8 +60,6 @@ export default {
   data () {
     return {
       
-      isGiris: Boolean,
-      
     }
   },
   mounted() {

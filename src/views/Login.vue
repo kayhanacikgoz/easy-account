@@ -83,7 +83,7 @@ export default {
           }  
       )
       console.log(result)
-      if (result.status==200 && result.data.MSG_TYPE =="S") {
+      if (result.status==200 && result.data.MSG_TYPE == "S") {
           let userLogin = result.data.MSG_TYPE;
           this.$store.commit('login', userLogin)
           this.$router.push({name: 'Home'})

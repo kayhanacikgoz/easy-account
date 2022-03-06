@@ -4,7 +4,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-let sagdiclar_authenticated = window.localStorage.getItem('sagdiclar_authenticated');
+let sagdiclar_authenticated = Boolean;
+sagdiclar_authenticated = window.localStorage.getItem('sagdiclar_authenticated');
 
 export default new Vuex.Store({
   state: {
@@ -47,7 +48,7 @@ export default new Vuex.Store({
     },
     login(state, userLogin) {
       if (userLogin == "S"){
-        state.sagdiclar_authenticated = true
+        state.sagdiclar_authenticated = "true"
         this.commit('setAuthentication');
       } 
     },
@@ -70,12 +71,9 @@ export default new Vuex.Store({
       commit('updateIsCikis');
     },
     loadUserInfo({ commit }) {
-      let formData = new FormData();
-
-        formData.append('member_id', 2);
-
+      
       axios.post(
-        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=member_info", formData, {
+        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=member_info", {
           headers: {'Content-type' : 'application/x-www-form-urlencoded'}
         }).then(response => response.data).then(userInfo => {
           //console.log(userInfo);
