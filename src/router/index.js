@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
-import Home from '../views/Home.vue'
 import Login from '../views/Login'
 
 Vue.use(VueRouter)
@@ -11,44 +10,19 @@ const routes = [
     path: '/',
     redirect: {
       name: 'Login',
-    },
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated == "true") {
-        next("/home");
-      } else {
-        next();
-        from();
-        to();
-      }
     }
   },
   {
     path: '/home',
     name: 'Home',
-    component: Home,
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true") {
-        next("/login");
-      } else {
-        next();
-        from();
-        to();
-      }
-    }
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    meta: {requiresAuth: true}
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated == "true") {
-        next("/home");
-      } else {
-        next();
-        from();
-        to();
-      }
-    }
+    meta: {guest: true}
   },
   {
     path: '/fatura',
@@ -57,15 +31,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Fatura.vue'),
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true" ) {
-        next("/login");
-      } else {
-        next();
-        from();
-        to();
-      }
-    }
+    meta: {requiresAuth: true}
   },
   {
     path: '/list',
@@ -74,15 +40,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/List.vue'),
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true") {
-        next("/login");
-      } else {
-        next();
-        from();
-        to();
-      }
-    }
+    meta: {requiresAuth: true}
   },
   {
     path: '/report',
@@ -91,15 +49,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Report.vue'),
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true") {
-        next("/login");
-      } else {
-        next();
-        from();
-        to();
-      }
-    }
+    meta: {requiresAuth: true}
   },
   {
     path: '/faturadetay/:id',
@@ -108,22 +58,38 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/FaturaDetay.vue'),
-    beforeEnter: (to, from, next) => {
-      if(store.state.sagdiclar_authenticated != "true") {
-        next("/login");
-      } else {
-        next();
-        from();
-        to();
-      }
-    }
+    meta: {requiresAuth: true}
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(store.getters.isAuthenticated) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (store.getters.isAuthenticated) {
+      next("/home");
+      return;
+    }
+    next();
+  } else {
+    next();
+  }
+});
+
+export default router;

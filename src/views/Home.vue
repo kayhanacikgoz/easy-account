@@ -3,9 +3,9 @@
     <v-main>
       <v-container class="align-start fill-height" fluid>
         <v-row class="justify-space-between" rows="1" >
-          <h4 class="mt-4 ml-4"><span class="font-weight-regular">Hoşgeldin</span> {{userInfo.member.MEMBER_NICK}}</h4>
+          <h4 class="mt-4 ml-4"><span class="font-weight-regular">Hoşgeldin</span></h4>
           <v-btn class="mt-4 mr-4" color="deep-orange" text>
-            <h3 v-on:click="logout">Logout</h3>
+            <h3>Logout</h3>
           </v-btn>
         </v-row>
         
@@ -50,41 +50,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Home',
-  components: {
-    
-  },
   data () {
     return {
-      
+      //
     }
   },
   mounted() {
-    this.$store.dispatch('loadUserInfo');
+    //
   },
   computed: {
-    
-    ...mapState([
-          'userInfo'
-      ]),
-    }, 
+    ...mapGetters({ User: "StateUser" }),
+  }, 
     
   methods: {
-     logout() {
-            
-      /*let result =  axios.post(
-        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=logout",
-        {
-        'Content-type': 'application/x-www-form-urlencoded'
-      }
-      )*/
-      this.$store.commit('logout')
-      this.$router.push({name: 'Login'})  
-    }
-    
+    //
   },
 }
 </script>

@@ -12,15 +12,15 @@
                       <v-card-text class="mt-8">
                         <h3 class="text-center display-2 light-blue--text text--darken-2 mb-5">Giriş Yapın</h3>
                         <h5></h5>
-                        <v-form>
-                          <h4 v-if="state" class="red--text">Kullanıcı adı veya şifreniz hatalı. Lütfen tekrar deneyiniz.</h4>
+                        <v-form @submit.prevent="submit">
+                          <h4 v-if="showError" id="error" class="red--text">Kullanıcı adı veya şifreniz hatalı. Lütfen tekrar deneyiniz.</h4>
                           <v-text-field
                           id="email"
                           label="Email"
                           name="email"
-                          type="text"
+                          type="email"
                           color="light-blue darken-2" 
-                          v-model="email"
+                          v-model="form.email"
                           />
                           <v-text-field
                           id="password"
@@ -28,22 +28,16 @@
                           name="password"
                           type="password"
                           color="light-blue darken-2" 
-                          v-model="password"
+                          autocomplete="current-password"
+                          v-model="form.password"
                           />
                           <div class="text-center mt-3">
-                            <v-btn v-on:click="login" value="Login" rounded color="light-blue darken-2 mb-5 mr-3" dark>Giriş Yap</v-btn>
+                            <v-btn type="submit" rounded color="light-blue darken-2 mb-5 mr-3" dark>Giriş Yap</v-btn>
                           </div>
                         </v-form>
                       </v-card-text>
                     </v-col>
                     <v-col cols="12" md="4" class="light-blue darken-2">
-                      <v-card-text class="white--text mt-8">
-                        <h1 class="text-center display-1 mb-5">Hoşgeldiniz</h1>
-                        <h4 class="text-center">Uygulamayı kullanmak için kayıt olun.</h4>
-                      </v-card-text>
-                      <div class="text-center mb-8">
-                        <router-link to="" class="text-decoration-none"><v-btn rounded outlined dark @click="step++">Kayıt Ol</v-btn></router-link>
-                      </div>
                     </v-col>
                   </v-row>
                 </v-window-item>
@@ -57,40 +51,33 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from "vuex";
 
 export default {
+  name: 'Login',
   data() {
     return {
-      email: '',
-      password: '',
-
+      form: {
+        email: '',
+        password: '',
+      },
+      showError: false,
     }
   },
   methods: {
-    async login() {
-
-      let formData = new FormData();
-
-      formData.append('email', this.email);
-      formData.append('password', this.password);
-              
-      let result = await axios.post(
-          "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=login",
-          formData,
-          {
-          'Content-type': 'application/x-www-form-urlencoded'
-          }  
-      )
-      console.log(result)
-      if (result.status==200 && result.data.MSG_TYPE == "S") {
-          let userLogin = result.data.MSG_TYPE;
-          this.$store.commit('login', userLogin)
-          this.$router.push({name: 'Home'})
-      } else {
-          alert("Lütfen giriş yapınız!")
+    ...mapActions(["LogIn"]),
+    async submit() {
+      const User = new FormData();
+      User.append("email", this.form.email);
+      User.append("password", this.form.password);
+      try {
+          await this.LogIn(User);
+          this.$router.push("/home");
+          this.showError = false;
+      } catch(error) {
+          this.showError = true
       }
-    }
+    },
   },
  
 }

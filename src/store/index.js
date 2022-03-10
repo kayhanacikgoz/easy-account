@@ -1,24 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from "vuex-persistedstate";
+import auth from './modules/auth';
 
 Vue.use(Vuex)
 
-let sagdiclar_authenticated = window.localStorage.getItem('sagdiclar_authenticated');
 
 export default new Vuex.Store({
   state: {
-    userInfo:[],
     reportItems:[],
     tranDetails: [],
     tranItems: [],
-    partnerItems: [],
-    sagdiclar_authenticated: sagdiclar_authenticated
+    partnerItems: []
   },
   getters: {
-    userInfo: state => {
-      return state.userInfo;
-    },
     reportItems: state => {
       return state.reportItems;
     },
@@ -30,9 +26,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    loadUserInfo(state, userInfo) {
-      state.userInfo = userInfo;
-    },
     loadReportList(state, reportItems) {
       state.reportItems = reportItems;
     },
@@ -44,41 +37,9 @@ export default new Vuex.Store({
     },
     loadPartnerList(state,partnerItems) {
       state.partnerItems = partnerItems;
-    },
-    login(state, userLogin) {
-      if (userLogin == "S"){
-        state.sagdiclar_authenticated = "true"
-        this.commit('setAuthentication');
-      } 
-    },
-    setAuthentication(state) {
-      window.localStorage.setItem('sagdiclar_authenticated',JSON.stringify(state.sagdiclar_authenticated));
-    },
-    logout(state){
-      state.sagdiclar_authenticated = null;
-      this.commit('setLogout');
-    },
-    setLogout(state) {
-      window.localStorage.setItem('sagdiclar_authenticated',JSON.stringify(state.sagdiclar_authenticated));
-    },
+    }
   },
   actions: {
-    updateIsGiris: ({ commit }) => {
-      commit('updateIsGiris');
-    },
-    updateIsCikis: ({ commit }) => {
-      commit('updateIsCikis');
-    },
-    loadUserInfo({ commit }) {
-      
-      axios.post(
-        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=member_info", {
-          headers: {'Content-type' : 'application/x-www-form-urlencoded'}
-        }).then(response => response.data).then(userInfo => {
-          //console.log(userInfo);
-          commit('loadUserInfo', userInfo)
-        })
-    },
     loadReportList({ commit }) {
       let formDataReport = new FormData();
 
@@ -150,5 +111,7 @@ export default new Vuex.Store({
     
   },
   modules: {
-  }
+    auth
+  },
+  plugins: [createPersistedState()],
 })

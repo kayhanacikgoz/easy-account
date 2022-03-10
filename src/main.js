@@ -5,16 +5,24 @@ import store from './store'
 import axios from 'axios'
 import vuetify from './plugins/vuetify'
 
-Vue.config.productionTip = false
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'https://sagdiclarmimarlik.sisu9.com';
 
-export default {
-  data: () => ({
-    date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-    menu: false,
-    modal: false,
-    menu2: false,
-  }),
-}
+/*axios.defaults.headers.common['Content-Type'] = 'application/json'
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';*/
+
+axios.interceptors.response.use(undefined, function(error) {
+  if(error) {
+    const originalRequest = error.config;
+    if(error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      store.dispatch('LogOut');
+      return router.push('/login');
+    }
+  }
+})
+
+Vue.config.productionTip = false
 
 new Vue({
   axios,
