@@ -98,7 +98,7 @@
                     ></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field label="Tutar" v-model="tutarPost" name="tutarPost" solo dense></v-text-field>
+                    <v-text-field label="Tutar" v-model="tutarPost" name="tutarPost" type="number" solo dense></v-text-field>
                   </v-col>
                   <v-col cols="12" md="6" sm="6">
                     <v-textarea solo name="aciklamaPost" label="Açıklama" v-model="aciklamaPost"></v-textarea>

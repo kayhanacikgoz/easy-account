@@ -5,7 +5,7 @@
         <v-row class="justify-space-between" rows="1" >
           <h4 class="mt-4 ml-4"><span class="font-weight-regular">Hoşgeldin</span></h4>
           <v-btn class="mt-4 mr-4" color="deep-orange" text>
-            <h3>Logout</h3>
+            <h3 @click="logout">Logout</h3>
           </v-btn>
         </v-row>
         
@@ -67,7 +67,10 @@ export default {
   }, 
     
   methods: {
-    //
+    async logout() {
+      await this.$store.dispatch('LogOut');
+      this.$router.push('/login');
+    },
   },
 }
 </script>

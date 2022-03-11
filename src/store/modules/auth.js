@@ -38,7 +38,7 @@ const mutations = {
     },
     logout(state){
         state.user = null;
-        state.home = null;
+        //state.home = null;
     },
 };
 

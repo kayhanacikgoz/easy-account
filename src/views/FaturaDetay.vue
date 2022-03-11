@@ -114,6 +114,7 @@
                     :value="tranDetails[0].MASTER_TRAN_AMOUNT"
                     v-model="tutarPost"
                     name="tutarPost"
+                    type="number"
                     solo
                     dense
                   ></v-text-field>
