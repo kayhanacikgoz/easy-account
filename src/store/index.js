@@ -97,13 +97,8 @@ export default new Vuex.Store({
 
     loadPartnerList({ commit }) {
       /* let formDataPartner = new FormData();
-
       formDataPartner.append('none', 'none'); */
-
-      axios.post(
-        "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=partner_list", {
-          headers: {'Content-type' : 'application/x-www-form-urlencoded'}
-        }).then(response => response.data.partner_list).then(partnerItems => {
+     axios.post("https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=partner_list").then(response => response.data.partner_list).then(partnerItems => {
           console.log(partnerItems);
           commit('loadPartnerList', partnerItems)
         })
