@@ -50,7 +50,7 @@ export default new Vuex.Store({
       formDataReport.append('sayfano', null);
       formDataReport.append('bastarih', '2021-07-01');
       formDataReport.append('sontarih', '2022-11-30');
-      formDataReport.append('gosterim', 999);
+      formDataReport.append('gosterim', 50);
 
       axios.post(
         "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_report", formDataReport, {
@@ -71,7 +71,7 @@ export default new Vuex.Store({
       formDataTran.append('sayfano', null);
       formDataTran.append('bastarih', '2021-07-01');
       formDataTran.append('sontarih', '2022-11-30');
-      formDataTran.append('gosterim', 10);
+      formDataTran.append('gosterim', 50);
 
       axios.post(
         "https://sagdiclarmimarlik.sisu9.com/hizmet.php?page=transaction_list", formDataTran, {
