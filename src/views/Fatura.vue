@@ -1,15 +1,15 @@
 <template>
   <v-container class="align-center justify-center fill-height" fluid>
-    <v-card width="90%" color="" :loading="isUpdating" elevation="10" class="pa-8">
-      <v-row>
-        <router-link to="home" class="text-decoration-none">
-          <v-btn class="mx-3 my-2" color="orange" fab small dark>
-            <v-icon>mdi-home</v-icon>
+    <v-card color="" :loading="isUpdating" elevation="10" class="pa-8">
+      <v-row class="green lighten-1 pt-4 pb-4 mb-3 d-flex align-center justify-space-between">
+        <h2 class="my-2 mx-4 grey--text text--lighten-5">Yeni Fatura</h2>
+        <router-link to="home" class="text-decoration-none d-flex align-center">
+          <v-btn class="green lighten-1 mx-4 py-6" small dark>
+            <v-icon medium>mdi-home</v-icon>
           </v-btn>
         </router-link>
-        <h1 class="mx-3 my-2">Yeni Fatura</h1>
       </v-row>
-      <v-divider class="my-5"></v-divider>
+      
       <v-row>
         <v-container>
           <v-form>
@@ -19,7 +19,6 @@
                   <v-col class="d-flex" cols="12" sm="2">
                     <v-text-field value="0" label="Numara" filled disabled></v-text-field>
                   </v-col>
-
                   <v-col class="d-flex" cols="12" sm="5">
                     <v-select
                       :items="firma"
@@ -28,10 +27,10 @@
                       label="Firma"
                       v-model="firmaPost"
                       name="firmaPost"
+                      color="green lighten-1"
                       outlined
                     ></v-select>
                   </v-col>
-
                   <v-col class="d-flex" cols="12" sm="5">
                     <v-select
                       :items="hesapTuru"
@@ -40,6 +39,7 @@
                       label="Hesap Türü"
                       v-model="hesapTuruPost"
                       name="hesapTuruPost"
+                      color="green lighten-1"
                       outlined
                     ></v-select>
                   </v-col>
@@ -53,21 +53,10 @@
                       label="Partner"
                       v-model="loadPartnerList"
                       name="loadPartnerList"
+                      color="green lighten-1"
                       outlined
                     ></v-select>
                   </v-col>
-
-                  <!--<v-col class="d-flex" cols="12" sm="4" md="4">
-                    <v-select
-                      :items="partnertype"
-                      item-text="text"
-                      item-value="value"
-                      label="Partner Tipi"
-                      v-model="partnertypePost"
-                      name="partnertypePost"
-                      solo
-                    ></v-select>
-                  </v-col>-->
                   <v-col cols="12" sm="6" md="4">
                     <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
                       <template v-slot:activator="{ on, attrs }">
@@ -78,45 +67,36 @@
                           readonly
                           v-bind="attrs"
                           v-on="on"
+                          color="green lighten-1"
+                          outlined
                         ></v-text-field>
                       </template>
                       <v-date-picker v-model="tarihPost" @input="menu2 = false"></v-date-picker>
                     </v-menu>
                   </v-col>
-              <!--     <v-col class="d-flex" cols="12" sm="4" md="4">
-                    <v-select :items="donem" item-text="text" item-value="value" label="Dönem" v-model="donemPost" name="donemPost" solo></v-select>
-                  </v-col> -->
                   <v-col class="d-flex" cols="12" sm="4" md="4">
                     <v-select
                       :items="paraBirimi"
                       item-text="text"
                       item-value="value"
-                      label="Para Birimi"
+                      label= "Para Birimi"
                       v-model="paraBirimiPost"
                       name="paraBirimiPost"
-                      solo
+                      color="green lighten-1"
+                      outlined
                     ></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field label="Tutar" v-model="tutarPost" name="tutarPost" type="number" solo dense></v-text-field>
+                    <v-text-field prepend-icon="mdi-cash" color="green lighten-1" label="Tutar" v-model="tutarPost" name="tutarPost" type="number" outlined></v-text-field>
                   </v-col>
                   <v-col cols="12" md="6" sm="6">
-                    <v-textarea solo name="aciklamaPost" label="Açıklama" v-model="aciklamaPost"></v-textarea>
+                    <v-textarea name="aciklamaPost" color="green lighten-1" label="Açıklama" v-model="aciklamaPost" outlined></v-textarea>
                   </v-col>
                 </v-row>
               </v-row>
               <v-row> </v-row>
               <v-row>
-                <v-btn v-on:click="addFatura" color="info" dark> kaydet </v-btn>
-                <!--<v-btn 
-                            to="Fatura"
-                            x-large
-                            class="ml-5"
-                            color="red"
-                            dark
-                            >
-                            temizle
-                            </v-btn>-->
+                <v-btn v-on:click="addFatura" class="green lighten-1" dark x-large> kaydet </v-btn>
               </v-row>
             </v-container>
           </v-form>

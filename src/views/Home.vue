@@ -13,34 +13,34 @@
           <v-col cols="12" sm="8" md="8">
             <v-card
               min-height="50vh" elevation="12"
-              class="mx-auto d-flex flex-column">
-                <v-row dense class="justify-center pa-10 pb-3">
-                  <v-card width="100%" color="light-blue darken-2" dark>
-                    <router-link to="fatura" class="text-decoration-none">
-                      <v-btn block height="100%" text>
-                        <h3>Fatura Girişi</h3>    
+              class="mx-auto d-flex pa-7 flex-wrap">
+                <v-column dense class="justify-center pa-2 align-stretch flex-grow-1">
+                  <router-link to="fatura" class="text-decoration-none">
+                    <v-card height="100%" color="green lighten-1 d-flex align-center justify-center" dark>
+                      <v-btn block class="pa-5" text>
+                        <h3>Fatura GİrİŞİ</h3>    
                       </v-btn>
-                    </router-link>
-                  </v-card>
-                </v-row>
-                <v-row dense class="justify-center pa-10 pt-3">
-                  <v-card width="100%" color="deep-orange" dark>
-                    <router-link to="list" class="text-decoration-none">
-                      <v-btn block height="100%" text>
-                        <h3>Faturaların Listesi</h3>
-                      </v-btn>
-                    </router-link>
-                  </v-card>
-                </v-row>
-                <v-row dense class="justify-center pa-10 pt-3">
-                  <v-card width="100%" color="green lighten-1" dark>
-                    <router-link to="report" class="text-decoration-none">
-                      <v-btn block height="100%" text>
-                        <h3>Müşteri Raporu</h3>
-                      </v-btn>
-                    </router-link>
-                  </v-card>
-                </v-row>
+                    </v-card>
+                  </router-link>
+                </v-column>
+                <v-column dense class="justify-center pa-2 flex-grow-1">
+                  <router-link to="list" class="text-decoration-none">
+                    <v-card height="100%" color="deep-orange lighten-1 d-flex align-center justify-center" dark>                  
+                      <v-btn block class="pa-5" text>
+                        <h3>Faturaların Lİstesİ</h3>
+                      </v-btn>               
+                    </v-card>
+                  </router-link>
+                </v-column>
+                <v-column dense class="justify-center pa-2 flex-grow-1">
+                  <router-link to="report" class="text-decoration-none">
+                    <v-card height="100%" color="light-blue darken-3 d-flex align-center justify-center" dark>                  
+                      <v-btn block class="pa-5" text>
+                        <h3>Müşterİ Raporu</h3>
+                      </v-btn>                   
+                    </v-card>
+                  </router-link>
+                </v-column>
             </v-card>
           </v-col>
         </v-row>

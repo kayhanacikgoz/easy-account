@@ -10,7 +10,7 @@
                   <v-row>
                     <v-col cols="12" md="8" class="">
                       <v-card-text class="mt-8">
-                        <h3 class="text-center display-2 light-blue--text text--darken-2 mb-5">Giriş Yapın</h3>
+                        <h3 class="text-center display-2 green--text text--lighten-1 mb-5">Giriş Yapın</h3>
                         <h5></h5>
                         <v-form @submit.prevent="submit">
                           <h4 v-if="showError" id="error" class="red--text">Kullanıcı adı veya şifreniz hatalı. Lütfen tekrar deneyiniz.</h4>
@@ -19,7 +19,8 @@
                           label="Email"
                           name="email"
                           type="email"
-                          color="light-blue darken-2" 
+                          prepend-icon="mdi-email"
+                          color="green lighten-1" 
                           v-model="form.email"
                           />
                           <v-text-field
@@ -27,17 +28,18 @@
                           label="Password"
                           name="password"
                           type="password"
-                          color="light-blue darken-2" 
+                          prepend-icon="mdi-lock"
+                          color="green lighten-1" 
                           autocomplete="current-password"
                           v-model="form.password"
                           />
                           <div class="text-center mt-3">
-                            <v-btn type="submit" rounded color="light-blue darken-2 mb-5 mr-3" dark>Giriş Yap</v-btn>
+                            <v-btn type="submit" x-large rounded color="green lighten-1 mb-5 mr-3" dark>Gİrİş Yap</v-btn>
                           </div>
                         </v-form>
                       </v-card-text>
                     </v-col>
-                    <v-col cols="12" md="4" class="light-blue darken-2">
+                    <v-col cols="12" md="4" class="green lighten-1">
                     </v-col>
                   </v-row>
                 </v-window-item>
